@@ -1,0 +1,47 @@
+﻿@model FrontEnd.ViewModels.EmpleadoFormViewModel
+
+@{
+    ViewBag.Title = "Crear Empleado";
+}
+
+<h2>Crear Empleado</h2>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["mensaje"]</div>
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-group mb-3">
+        @Html.LabelFor(m => m.Empleado.Nombre)
+        @Html.TextBoxFor(m => m.Empleado.Nombre, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.Label("Puesto")
+        @Html.DropDownListFor(m => m.Empleado.IdPuesto, Model.Puestos, "-- Selecciona un puesto --", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group mb-4">
+        @Html.Label("Jefe")
+        @Html.DropDownListFor(m => m.Empleado.IdJefe, Model.Jefes, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.Empleado.FechaRegistro)
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            var alerta = document.getElementById("mensaje-alerta");
+            if (alerta) {
+                alerta.style.display = "none";
+            }
+        }, 4000); // Oculta después de 4 segundos
+    </script>
+}
