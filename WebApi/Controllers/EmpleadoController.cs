@@ -52,5 +52,26 @@ namespace WebApi.Controllers
             await _service.ActualizarAsync(id, empleado);
             return Ok("Empleado actualizado.");
         }
+
+        /// <summary>Elimina un empleado.</summary>
+        [HttpDelete, Route("{id:int}")]
+        public async Task<IHttpActionResult> Eliminar(int id)
+        {
+            try
+            {
+                await _service.EliminarAsync(id);
+                return Ok("Empleado eliminado correctamente.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (Exception ex)
+            {
+               
+                return InternalServerError(ex);
+            }
+        }
     }
 }
