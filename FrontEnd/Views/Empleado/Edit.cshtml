@@ -1,0 +1,34 @@
+﻿@model FrontEnd.ViewModels.EmpleadoFormViewModel
+
+@{
+    ViewBag.Title = "Modificar Empleado";
+}
+
+<div class="container mt-4">
+    <h2>Modificar Empleado</h2>
+
+    @using (Html.BeginForm("Edit", "Empleado", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Empleado.IdEmpleado)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Empleado.Nombre)
+            @Html.TextBoxFor(m => m.Empleado.Nombre, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Puesto")
+            @Html.DropDownListFor(m => m.Empleado.IdPuesto, new SelectList(Model.Puestos, "Value", "Text"), "-- Seleccione --", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Jefe")
+            @Html.DropDownListFor(m => m.Empleado.IdJefe, new SelectList(Model.Jefes, "Value", "Text"), "-- Sin jefe --", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+        </div>
+    }
+</div>

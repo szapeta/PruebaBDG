@@ -104,3 +104,18 @@ BEGIN
     WHERE idempleado = @idempleado;
 END;
 GO
+
+CREATE PROCEDURE sp_Empleado_Eliminar
+    @idempleado INT
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM empleado WHERE idjefe = @idempleado)
+    BEGIN
+        RAISERROR('No se puede eliminar el empleado porque está asignado como jefe de otros empleados.', 16, 1);
+        RETURN;
+    END
+
+    DELETE FROM empleado
+    WHERE idempleado = @idempleado;
+END;
+GO

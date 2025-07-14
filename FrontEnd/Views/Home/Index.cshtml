@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-4">Proyecto creado por Sergio Zapeta</h1>
+
+    <p class="lead mt-3">
+        Link al repositorio:<br />
+        <a href="https://github.com/szapeta/PruebaBDG" target="_blank">
+            https://github.com/szapeta/PruebaBDG
+        </a>
+    </p>
+
+    <hr class="my-4" />
+
+    <div class="mt-4">
+        <h5>Ir a:</h5>
+
+        <a class="btn btn-outline-primary m-2" href="@Url.Action("Index", "Puesto")">
+            Consulta de Puestos
+        </a>
+
+        <a class="btn btn-outline-success m-2" href="@Url.Action("Index", "Empleado")">
+            Consulta de Empleados
+        </a>
+    </div>
+</div>

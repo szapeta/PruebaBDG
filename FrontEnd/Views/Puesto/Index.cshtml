@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FrontEnd.Models.Puesto>
+
+@{
+    ViewBag.Title = "Listado de Puestos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Listado de Puestos</h2>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Puesto")">Crear Nuevo</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idPuesto</td>
+                    <td>@item.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

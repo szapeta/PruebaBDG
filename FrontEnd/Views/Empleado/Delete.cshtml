@@ -1,0 +1,21 @@
+﻿@model FrontEnd.ViewModels.EmpleadoListViewModel
+
+@{
+    ViewBag.Title = "Eliminar Empleado";
+}
+
+<div class="container mt-4">
+    <h2>¿Estás seguro de eliminar este empleado?</h2>
+
+    <div class="alert alert-danger">
+        <strong>@Model.Nombre</strong> — @Model.Puesto
+    </div>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Empleado", FormMethod.Post))
+    {
+        @Html.Hidden("id", Model.IdEmpleado)
+
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+    }
+</div>

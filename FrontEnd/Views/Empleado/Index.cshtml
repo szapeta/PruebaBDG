@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FrontEnd.ViewModels.EmpleadoListViewModel>
+
+@{
+    ViewBag.Title = "Listado de Empleados";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Listado de Empleados</h2>
+        <a class="btn btn-success" href="@Url.Action("Create", "Empleado")">Crear Nuevo</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Puesto</th>
+                <th>Jefe</th>
+                <th>Fecha de Registro</th>
+                <th style="width: 150px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Nombre</td>
+                    <td>@emp.Puesto</td>
+                    <td>@(string.IsNullOrEmpty(emp.Jefe) ? "-" : emp.Jefe)</td>
+                    <td>@emp.FechaRegistro</td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a class="btn btn-outline-secondary" href="@Url.Action("Edit", "Empleado", new { id = emp.IdEmpleado })">
+                                Modificar
+                            </a>
+                            <a class="btn btn-outline-secondary" href="@Url.Action("Delete", "Empleado", new { id = emp.IdEmpleado })"
+                               onclick="return confirm('¿Estás seguro de eliminar este empleado?');">
+                                Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

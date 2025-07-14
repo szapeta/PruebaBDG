@@ -16,6 +16,7 @@ namespace WebApi.Repository
         Task<Empleado> ObtenerPorIdAsync(int id);
         Task InsertarAsync(Empleado empleado);
         Task ActualizarAsync(int id, Empleado empleado);
+        Task EliminarAsync(int id);
     }
     public class EmpleadoRepository : IEmpleadoRepository
     {
@@ -104,5 +105,31 @@ namespace WebApi.Repository
                 await cmd.ExecuteNonQueryAsync();
             }
         }
+
+        public async Task EliminarAsync(int id)
+        {
+            using (var conn = new SqlConnection(_connectionString))
+            using (var cmd = new SqlCommand("sp_Empleado_Eliminar", conn) { CommandType = CommandType.StoredProcedure })
+            {
+                cmd.Parameters.AddWithValue("@idempleado", id);
+
+                await conn.OpenAsync();
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                }
+                catch (SqlException ex)
+                {
+                    
+                    if (ex.Number == 50000)
+                    {
+                        throw new InvalidOperationException(ex.Message);
+                    }
+
+                    throw;
+                }
+            }
+        }
+
     }
 }
